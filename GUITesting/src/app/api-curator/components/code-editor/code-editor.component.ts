@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ValidationPointService} from '../../services/validation-point.service';
 
 @Component({
   selector: 'app-code-editor',
@@ -7,15 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CodeEditorComponent implements OnInit {
   fileToCheck: File = null;
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
-  public handleFileInput(eventTarget: EventTarget) {
+  public handleFileInput(eventTarget: EventTarget): void {
     const eventAsInputTarget = eventTarget as HTMLInputElement;
     const files: FileList = eventAsInputTarget.files;
     this.fileToCheck = files.item(0);
+  }
+
+  public checkFile(): void {
+    console.log('check file is ' + ValidationPointService.callValidations(this.fileToCheck));
   }
 
 }
